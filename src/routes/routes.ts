@@ -17,11 +17,11 @@ import {
 const routerMiddleware = express.Router();
 
 routerMiddleware.get("/getPods", getPodsHandler);
+routerMiddleware.get("/getNamespace", getNamespaceHandler);
 routerMiddleware.get("/getServices", getServicesHandler);
 routerMiddleware.post("/createNamespace", createNamespaceHandler);
 routerMiddleware.post("/createPod", creatrePodsHandler);
 routerMiddleware.post("/createService", createServiceHandler);
-routerMiddleware.get("/getNamespace", getNamespaceHandler);
 routerMiddleware.delete("/deleteNamespace", deleteNamespaceHandler);
 routerMiddleware.delete("/deletePod", deletePodHandler);
 
