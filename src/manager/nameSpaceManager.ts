@@ -1,4 +1,4 @@
-const k8s = require("@kubernetes/client-node");
+import * as k8s from "@kubernetes/client-node";
 
 const kc = new k8s.KubeConfig();
 kc.loadFromDefault();
@@ -26,8 +26,7 @@ export const getNameSpaces = async () => {
     },
   };
   const getNameSpace = await k8sApi.readNamespace(namespace.metadata.name);
-
-  if (getNameSpace.length == 0) {
+  if (!getNameSpace) {
     return Promise.reject("No Pods Found");
   } else {
     return Promise.resolve(getNameSpace);
@@ -40,10 +39,7 @@ export const deleteNameSpaces = async (data: any) => {
       name: data.name,
     },
   };
-  const deleteNameSpace = await k8sApi.deleteNamespace(
-    namespace.metadata.name,
-    {}
-  );
+  const deleteNameSpace = await k8sApi.deleteNamespace(namespace.metadata.name);
   if (deleteNameSpace) {
     return Promise.resolve("NameSpace Deleted");
   } else {
