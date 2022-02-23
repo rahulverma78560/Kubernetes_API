@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
-import { getPods } from "../manager/podsManager";
+import { getServices } from "../manager/serviceManager";
 import { createResponses } from "../utility/createResponse";
 
-export const getPodsHandler = async (req: Request, res: Response) => {
-  getPods()
+export const getServicesHandler = async (req: Request, res: Response) => {
+  getServices()
     .then((data: any) => {
       return res.status(200).json(createResponses(200, data));
     })
