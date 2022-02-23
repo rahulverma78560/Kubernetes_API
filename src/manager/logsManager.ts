@@ -9,7 +9,6 @@ const log = new k8s.Log(kc);
 const logStream = new stream.PassThrough();
 
 logStream.on("data", (chunk) => {
-  // use write rather than console.log to prevent double line feed
   process.stdout.write(chunk);
 });
 
@@ -24,7 +23,6 @@ log
     console.log(err);
   })
   .then((req) => {
-    // disconnects after 5 seconds
     setTimeout(function () {
       req.abort();
     }, 5000);
