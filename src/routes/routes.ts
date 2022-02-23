@@ -11,6 +11,7 @@ import {
 } from "../controller/podsController";
 import {
   createServiceHandler,
+  deleteServiceHandler,
   getServicesHandler,
 } from "../controller/serviceController";
 
@@ -24,5 +25,6 @@ routerMiddleware.post("/createPod", creatrePodsHandler);
 routerMiddleware.post("/createService", createServiceHandler);
 routerMiddleware.delete("/deleteNamespace", deleteNamespaceHandler);
 routerMiddleware.delete("/deletePod", deletePodHandler);
+routerMiddleware.delete("/deleteService", deleteServiceHandler);
 
 export default routerMiddleware;
