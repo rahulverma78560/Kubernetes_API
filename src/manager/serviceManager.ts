@@ -35,22 +35,24 @@ export const createServiceManager = async () => {
     const serviceSpec = {
       apiVersions: "networking.k8s.io/v1beta1",
       kind: "Service",
-      ports: {
-        port: 80,
-        targetPort: 8080,
-      },
-    } as k8s.V1Service;
+      ports: [
+        {
+          port: 80,
+          targetPort: 80,
+        },
+      ],
+    } as k8s.V1ServiceSpec;
 
     const service = {
       metadata: {
-        name: "test1",
+        name: "test2",
       },
       spec: serviceSpec,
     } as k8s.V1Service;
     await k8sApi
       .createNamespacedService("default", service)
       .catch((e) => console.error(e));
-    console.log("create");
+    console.log("created");
   } catch (err) {
     return "Error!: " + err;
   }

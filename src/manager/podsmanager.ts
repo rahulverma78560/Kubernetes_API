@@ -34,10 +34,10 @@ export const createPod = async (name: any, app: any) => {
   await k8sApi
     .createNamespacedPod("default", appPod)
     .catch((e) => console.error(e));
-  console.log("create", name);
+  console.log("created", name);
 };
 
 export const deletePod = async (name: any, namespace: any) => {
   await k8sApi.deleteNamespacedPod(name, namespace);
-  console.log("delete", name);
+  console.log("deleted", name);
 };
