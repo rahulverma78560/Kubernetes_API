@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { getPods } from "../manager/podsmanager";
+import { getPods } from "../manager/podsManager";
 import { createResponses } from "../utility/createResponse";
 
 export const getCategoryHandler = async (req: Request, res: Response) => {
