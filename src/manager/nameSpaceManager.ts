@@ -4,10 +4,10 @@ const kc = new k8s.KubeConfig();
 kc.loadFromDefault();
 const k8sApi = kc.makeApiClient(k8s.CoreV1Api);
 
-export const createNamespaceManager = async () => {
+export const createNamespaceManager = async (data: any) => {
   var namespace = {
     metadata: {
-      name: "test1",
+      name: data.name,
     },
   };
   try {
@@ -34,10 +34,10 @@ export const getNameSpaces = async () => {
   }
 };
 
-export const deleteNameSpaces = async () => {
+export const deleteNameSpaces = async (data: any) => {
   var namespace = {
     metadata: {
-      name: "test",
+      name: data.name,
     },
   };
   const deleteNameSpace = await k8sApi.deleteNamespace(
@@ -45,7 +45,7 @@ export const deleteNameSpaces = async () => {
     {}
   );
   if (deleteNameSpace) {
-    return Promise.resolve("NameSpace Deleted ");
+    return Promise.resolve("NameSpace Deleted");
   } else {
     return Promise.reject("NameSpace not found");
   }

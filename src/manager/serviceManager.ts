@@ -13,3 +13,62 @@ export const getServices = async () => {
     return Promise.resolve(getPods);
   }
 };
+
+export const createServiceManager = async () => {
+  var namespace = {
+    apiVersions: "networking.k8s.io/v1beta1",
+    kind: "Ingress",
+    metadata: {
+      name: "test1",
+    },
+    spec: {
+      type: "LoadBalancer",
+      app: "myapp",
+      ports: {
+        name: "http",
+        port: 80,
+        targetPort: 80,
+      },
+    },
+  };
+  try {
+    const service = await k8sApi.createNamespacedIngress("default", namespace);
+    console.log(service);
+    return "Created Service";
+  } catch (err) {
+    return "Error!: " + err;
+  }
+};
+// const clientIdentifier = "my-subdomain";
+
+// export const createServiceManager = async () => {
+//   try {
+//     const service = await k8sApi.createNamespacedIngress("default", {
+//       apiVersions: "networking.k8s.io/v1beta1",
+//       kind: "Ingress",
+//       metadata: { name: `production-custom-${clientIdentifier}` },
+//       spec: {
+//         rules: [
+//           {
+//             host: `${clientIdentifier}.example.com`,
+//             http: {
+//               paths: [
+//                 {
+//                   backend: {
+//                     serviceName: "production-auto-deploy",
+//                     servicePort: 5000,
+//                   },
+//                   path: "/",
+//                 },
+//               ],
+//             },
+//           },
+//         ],
+//         tls: [{ hosts: [`${clientIdentifier}.example.com`] }],
+//       },
+//     });
+//     return Promise.resolve(service);
+//   } catch (err) {
+//     return err;
+//   }
+// };
