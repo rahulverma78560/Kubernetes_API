@@ -1,21 +1,52 @@
-// // ....................................................
+const k8s = require("@kubernetes/client-node");
 
-// var namespace = {
-//   metadata: {
-//     name: "test",
-//   },
-// };
+const kc = new k8s.KubeConfig();
+kc.loadFromDefault();
+const k8sApi = kc.makeApiClient(k8s.CoreV1Api);
 
-// k8sApi.createNamespace(namespace).then(
-//   (response) => {
-//     console.log("Created namespace");
-//     console.log(response);
-//     k8sApi.readNamespace(namespace.metadata.name).then((response) => {
-//       console.log(response);
-//       // k8sApi.deleteNamespace(namespace.metadata.name, {} /* delete options */);
-//     });
-//   },
-//   (err) => {
-//     console.log("Error!: " + err);
-//   }
-// );
+export const createNamespaceManager = async () => {
+  var namespace = {
+    metadata: {
+      name: "test1",
+    },
+  };
+  try {
+    const create = await k8sApi.createNamespace(namespace);
+    console.log(create);
+    return "Created namespace";
+  } catch (err) {
+    console.log("Error!: " + err);
+  }
+};
+
+export const getNameSpaces = async () => {
+  var namespace = {
+    metadata: {
+      name: "",
+    },
+  };
+  const getNameSpace = await k8sApi.readNamespace(namespace.metadata.name);
+
+  if (getNameSpace.length == 0) {
+    return Promise.reject("No Pods Found");
+  } else {
+    return Promise.resolve(getNameSpace);
+  }
+};
+
+export const deleteNameSpaces = async () => {
+  var namespace = {
+    metadata: {
+      name: "test",
+    },
+  };
+  const deleteNameSpace = await k8sApi.deleteNamespace(
+    namespace.metadata.name,
+    {}
+  );
+  if (deleteNameSpace) {
+    return Promise.resolve("NameSpace Deleted ");
+  } else {
+    return Promise.reject("NameSpace not found");
+  }
+};
