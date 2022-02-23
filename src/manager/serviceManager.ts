@@ -15,22 +15,6 @@ export const getServices = async () => {
 };
 
 export const createServiceManager = async () => {
-  //   var namespace = {
-  //     apiVersions: "networking.k8s.io/v1beta1",
-  //     kind: "Ingress",
-  //     metadata: {
-  //       name: "test1",
-  //     },
-  //     spec: {
-  //       type: "LoadBalancer",
-  //       app: "myapp",
-  //       ports: {
-  //         name: "http",
-  //         port: 80,
-  //         targetPort: 80,
-  //       },
-  //     },
-  //   };
   try {
     const serviceSpec = {
       apiVersions: "networking.k8s.io/v1beta1",
