@@ -1,4 +1,5 @@
 import express from "express";
+import { getLogssHandler } from "../controller/logController";
 import {
   createNamespaceHandler,
   deleteNamespaceHandler,
@@ -18,6 +19,7 @@ import {
 const routerMiddleware = express.Router();
 
 routerMiddleware.get("/getPods", getPodsHandler);
+routerMiddleware.get("/getLogs", getLogssHandler);
 routerMiddleware.get("/getNamespace", getNamespaceHandler);
 routerMiddleware.get("/getServices", getServicesHandler);
 routerMiddleware.post("/createNamespace", createNamespaceHandler);
