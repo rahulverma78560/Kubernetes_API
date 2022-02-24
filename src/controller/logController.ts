@@ -3,7 +3,8 @@ import { getLogs } from "../manager/logsManager";
 import { createResponses } from "../utility/createResponse";
 
 export const getLogssHandler = async (req: Request, res: Response) => {
-  getLogs()
+  const data = req.body;
+  getLogs(data.nameSpace, data.podName)
     .then((data: any) => {
       return res.status(200).json(createResponses(200, data));
     })
