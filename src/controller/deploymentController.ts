@@ -18,12 +18,12 @@ export const getDeploymentsHandler = async (req: Request, res: Response) => {
 
 export const creatreDeploymentHandler = async (req: Request, res: Response) => {
   const podDetails = req.body;
-  createDeployment().then(
-    (data) => {
-      res.status(201).json(createResponses(201, data));
+  createDeployment(podDetails.deployName).then(
+    (successMessage) => {
+      return res.status(201).json(createResponses(201, successMessage));
     },
     (err) => {
-      res.status(400).json(createResponses(400, null, err));
+      return res.status(400).json(createResponses(400, null, err));
     }
   );
 };

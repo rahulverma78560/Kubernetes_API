@@ -13,7 +13,7 @@ export const getDeployment = async () => {
   }
 };
 
-export const createDeployment = async () => {
+export const createDeployment = async (deployName: any) => {
   const appPodContainer = {
     name: "nginx",
     image: "nginx:latest",
@@ -47,21 +47,27 @@ export const createDeployment = async () => {
   } as k8s.V1DeploymentSpec;
 
   const deployMetaData = {
-    name: "test",
+    name: deployName,
     namespace: "default",
     labels: {
       app: "test",
     },
   } as k8s.V1ObjectMeta;
 
-  const deployment = {
+  const deploymentConfig = {
     metadata: deployMetaData,
     spec: deploySpec,
   } as k8s.V1Deployment;
-  await k8sApi
-    .createNamespacedDeployment("default", deployment)
-    .catch((e) => console.error(e));
-  console.log("created", name);
+  try {
+    const deployment = await k8sApi.createNamespacedDeployment(
+      "default",
+      deploymentConfig
+    );
+    console.log("created", deployName);
+    return deployment;
+  } catch (err) {
+    return err;
+  }
 };
 
 export const DeleteDeployment = async () => {

@@ -16,10 +16,10 @@ export const creatrePodsHandler = async (req: Request, res: Response) => {
   const podDetails = req.body;
   createPod(podDetails.name, podDetails.app).then(
     (successMessage) => {
-      res.status(201).json(createResponses(201, successMessage));
+      return res.status(201).json(createResponses(201, successMessage));
     },
     (err) => {
-      res.status(400).json(createResponses(400, null, err));
+      return res.status(400).json(createResponses(400, null, err));
     }
   );
 };

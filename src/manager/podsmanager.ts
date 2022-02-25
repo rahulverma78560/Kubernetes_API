@@ -31,10 +31,13 @@ export const createPod = async (name: any, app: any) => {
       containers: [appPodContainer],
     },
   } as k8s.V1Pod;
-  await k8sApi
-    .createNamespacedPod("default", appPod)
-    .catch((e) => console.error(e));
-  console.log("created", name);
+  try {
+    const pod = await k8sApi.createNamespacedPod("default", appPod);
+    console.log("created", name);
+    return pod;
+  } catch (err) {
+    return err;
+  }
 };
 
 export const deletePod = async (name: any, namespace: any) => {
