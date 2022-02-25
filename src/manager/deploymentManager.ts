@@ -74,15 +74,10 @@ export const updateDeployment = async (
   nameSpace: any,
   data: any
 ) => {
-  const deploymentConfig = {
-    spec: {
-      replicas: 4,
-    },
-  } as k8s.V1Deployment;
   const deleteDeployment = await k8sApi.patchNamespacedDeployment(
-    "test",
-    "default",
-    deploymentConfig
+    name,
+    nameSpace,
+    data
   );
   if (!deleteDeployment) {
     return Promise.reject("No deleteDeployment Found");
