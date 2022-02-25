@@ -69,8 +69,29 @@ export const createDeployment = async (deployName: any) => {
     return err;
   }
 };
+export const updateDeployment = async (
+  name: any,
+  nameSpace: any,
+  data: any
+) => {
+  const deploymentConfig = {
+    spec: {
+      replicas: 4,
+    },
+  } as k8s.V1Deployment;
+  const deleteDeployment = await k8sApi.patchNamespacedDeployment(
+    "test",
+    "default",
+    deploymentConfig
+  );
+  if (!deleteDeployment) {
+    return Promise.reject("No deleteDeployment Found");
+  } else {
+    return Promise.resolve(deleteDeployment);
+  }
+};
 
-export const DeleteDeployment = async () => {
+export const deleteDeployment = async () => {
   const deleteDeployment = await k8sApi.deleteCollectionNamespacedDeployment(
     "default"
   );

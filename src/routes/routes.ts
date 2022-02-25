@@ -3,6 +3,7 @@ import {
   creatreDeploymentHandler,
   deleteDeploymentsHandler,
   getDeploymentsHandler,
+  updateDeploymentHandler,
 } from "../controller/deploymentController";
 import { getLogssHandler } from "../controller/logController";
 import {
@@ -32,6 +33,7 @@ routerMiddleware.post("/createNamespace", createNamespaceHandler);
 routerMiddleware.post("/createPod", creatrePodsHandler);
 routerMiddleware.post("/createService", createServiceHandler);
 routerMiddleware.post("/createDeployment", creatreDeploymentHandler);
+routerMiddleware.put("/updateDeployment", updateDeploymentHandler);
 routerMiddleware.delete("/deleteNamespace", deleteNamespaceHandler);
 routerMiddleware.delete("/deletePod", deletePodHandler);
 routerMiddleware.delete("/deleteService", deleteServiceHandler);
