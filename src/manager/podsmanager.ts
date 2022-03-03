@@ -1,7 +1,7 @@
 import * as k8s from "@kubernetes/client-node";
 
 const kc = new k8s.KubeConfig();
-kc.loadFromDefault();
+kc.loadFromFile("config.yml");
 const k8sApi = kc.makeApiClient(k8s.CoreV1Api);
 
 export const getPods = async () => {

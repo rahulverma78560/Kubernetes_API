@@ -1,7 +1,7 @@
 import stream from "stream";
 import * as k8s from "@kubernetes/client-node";
 const kc = new k8s.KubeConfig();
-kc.loadFromDefault();
+kc.loadFromFile("config.yml");
 
 const log = new k8s.Log(kc);
 
