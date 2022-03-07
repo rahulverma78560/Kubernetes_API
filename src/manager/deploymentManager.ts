@@ -13,7 +13,7 @@ export const getDeployment = async () => {
   }
 };
 
-export const createDeployment = async (deployName: any) => {
+export const createDeployment = async (deployName: string) => {
   const appPodContainer = {
     name: "nginx",
     image: "nginx:latest",
@@ -86,9 +86,13 @@ export const updateDeployment = async (
   }
 };
 
-export const deleteDeployment = async () => {
-  const deleteDeployment = await k8sApi.deleteCollectionNamespacedDeployment(
-    "default"
+export const deleteDeployment = async (
+  deployName: string,
+  nameSpace: string
+) => {
+  const deleteDeployment = await k8sApi.deleteNamespacedDeployment(
+    deployName,
+    nameSpace
   );
   if (!deleteDeployment) {
     return Promise.reject("No deleteDeployment Found");

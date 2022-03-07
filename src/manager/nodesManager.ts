@@ -33,7 +33,7 @@ export const createNodes = async () => {
 };
 
 export const deleteNodes = async () => {
-  const nodes = await k8sApi.deleteNode("");
+  const nodes = await k8sApi.deleteNode("aks-test-63555909-vmss000000");
   if (!nodes) {
     return Promise.reject("No Nodes Found");
   } else {

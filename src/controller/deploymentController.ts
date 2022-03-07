@@ -42,7 +42,8 @@ export const updateDeploymentHandler = async (req: Request, res: Response) => {
 };
 
 export const deleteDeploymentsHandler = async (req: Request, res: Response) => {
-  deleteDeployment()
+  const DeployDetails = req.body;
+  deleteDeployment(DeployDetails.deployName, DeployDetails.nameSpace)
     .then((data: any) => {
       return res.status(200).json(createResponses(200, data));
     })
